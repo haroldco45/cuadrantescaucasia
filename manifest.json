@@ -1,0 +1,17 @@
+{
+  "name": "Cuadrantes Vibras Positivas",
+  "short_name": "Cuadrantes",
+  "description": "Acceso rápido a los números de los cuadrantes de policía.",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#15803d",
+  "icons": [
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

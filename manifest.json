@@ -1,7 +1,7 @@
 {
-  "name": "Cuadrantes Vibras Positivas",
+  "name": "Cuadrantes de Seguridad - Vibras Positivas",
   "short_name": "Cuadrantes",
-  "description": "Acceso rápido a los números de los cuadrantes de policía.",
+  "description": "Acceso rápido a los números de emergencia de los cuadrantes en Caucasia.",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#f8fafc",

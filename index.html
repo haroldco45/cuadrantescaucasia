@@ -3,44 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cuadrantes de Seguridad</title>
+    <title>Cuadrantes de Seguridad - Vibras Positivas</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        .cuadrante-card { transition: transform 0.2s; }
-        .cuadrante-card:active { transform: scale(0.95); }
+        .cuadrante-card { transition: all 0.2s ease; }
+        .cuadrante-card:active { transform: scale(0.96); }
+        .pulse-red {
+            animation: pulse-red 2s infinite;
+        }
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+        }
     </style>
 </head>
-<body class="bg-gray-100 font-sans">
+<body class="bg-slate-50 font-sans antialiased text-slate-900">
 
-    <div class="max-w-md mx-auto p-4">
-        <header class="text-center mb-6">
-            <h1 class="text-2xl font-bold text-green-800">VIGILANCIA POR CUADRANTES</h1>
-            <p class="text-sm text-gray-600">Acceso rápido a emergencias</p>
+    <div class="max-w-md mx-auto min-h-screen flex flex-col p-4">
+        
+        <header class="text-center mb-6 pt-4">
+            <h1 class="text-2xl font-black text-green-700 leading-tight">MODELO NACIONAL DE VIGILANCIA</h1>
+            <p class="text-gray-500 font-medium uppercase text-xs tracking-widest">Por Cuadrantes</p>
         </header>
 
-        <a href="tel:3113978374" class="block bg-red-600 text-white text-center py-4 rounded-xl mb-6 shadow-lg pulse-animation">
-            <span class="block text-xs uppercase font-bold">Línea de Emergencia</span>
-            <span class="text-2xl font-black">311 397 8374</span>
+        <a href="tel:3113978374" class="pulse-red flex items-center justify-between bg-red-600 text-white p-4 rounded-2xl mb-6 shadow-xl transition-transform active:scale-95">
+            <div>
+                <span class="block text-[10px] uppercase font-bold opacity-80">Línea de Emergencia</span>
+                <span class="text-2xl font-black tracking-tighter">311 397 8374</span>
+            </div>
+            <div class="bg-white/20 p-3 rounded-full">
+                <i class="fas fa-phone-alt text-xl"></i>
+            </div>
         </a>
 
-        <div class="mb-6">
-            <input type="text" id="searchInput" placeholder="Busca tu barrio..." 
-                   class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 outline-none">
+        <div class="relative mb-6">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">
+                <i class="fas fa-search"></i>
+            </span>
+            <input type="text" id="searchInput" placeholder="Escribe tu barrio..." 
+                   class="w-full p-4 pl-10 rounded-2xl border-none shadow-sm focus:ring-2 focus:ring-green-500 outline-none text-lg">
         </div>
 
-        <div id="cuadrantesList" class="space-y-4">
+        <div id="cuadrantesList" class="space-y-4 flex-grow">
             </div>
+
+        <footer class="mt-12 mb-6 text-center border-t border-gray-200 pt-6">
+            <p class="text-[10px] text-gray-400 uppercase tracking-widest mb-1">App desarrollada por</p>
+            <p class="text-lg font-black text-slate-800 tracking-tighter">VIBRAS POSITIVAS</p>
+            <p class="text-xs font-bold text-green-600 mb-2">Derechos de Autor (311 770 0431)</p>
+            <div class="flex justify-center gap-2 text-[10px] text-gray-400">
+                <span>&copy; 2026</span>
+                <span>•</span>
+                <span>Seguridad Ciudadana</span>
+            </div>
+        </footer>
     </div>
 
     <script>
         const cuadrantes = [
-            { id: 1, color: "bg-orange-900", tel: "3148446209", barrios: "Camello 1-2, Santa Elena, Los Almendros, La 10, El Palmar, Villa Uribe, Nueva Santa Elena, San José, Pedro Valdivia, El Bosque, Las Villas, Santo Domingo, Barrio Lora" },
-            { id: 2, color: "bg-green-600", tel: "3148447487", barrios: "Asovivienda, El Triángulo, La Sudestación, Fiestas del Lago, Centro, Colinas del Portal, Buenos Aires 1-2, El Mar, Los Trabajadores, Altos de San Juan" },
-            { id: 3, color: "bg-blue-800", tel: "3148451116", barrios: "Kennedy, Loma Fresca, El Ferry, Villa Granada, Centro, El Carmen, El Águila, Las Vegas" },
-            { id: 4, color: "bg-orange-500", tel: "3136295815", barrios: "Pueblo Nuevo, La Playa, La Victoria, Clemente Arrieta, Nueva Estrella" },
-            { id: 5, color: "bg-pink-600", tel: "3147707291", barrios: "La Esperanza, 1 de Mayo, El Poblado, La Carbonera, Villa Javier 1-2, El Castillo, Parcelas de Caracolí, La Paz, El Prado, El Roble, Las Malvinas" },
-            { id: 6, color: "bg-purple-600", tel: "3114536529", barrios: "El Paraíso, Las Brisas, Carmen Granzón, Los Comuneros" },
-            { id: 7, color: "bg-red-700", tel: "3136402443", barrios: "Cementerio, San Rafael 1-2, Pajonal" }
+            { id: 1, color: "border-orange-900", btn: "bg-orange-900", tel: "3148446209", barrios: "Camello 1-2, Santa Elena, Los Almendros, La 10, El Palmar, Villa Uribe, Nueva Santa Elena, San José, Pedro Valdivia, El Bosque, Las Villas, Santo Domingo, Barrio Lora" },
+            { id: 2, color: "border-green-600", btn: "bg-green-600", tel: "3148447487", barrios: "Asovivienda, El Triángulo, La Sudestación, Fiestas del Lago, Centro, Colinas del Portal, Buenos Aires 1-2, El Mar, Los Trabajadores, Altos de San Juan" },
+            { id: 3, color: "border-blue-800", btn: "bg-blue-800", tel: "3148451116", barrios: "Kennedy, Loma Fresca, El Ferry, Villa Granada, Centro, El Carmen, El Águila, Las Vegas" },
+            { id: 4, color: "border-orange-500", btn: "bg-orange-500", tel: "3136295815", barrios: "Pueblo Nuevo, La Playa, La Victoria, Clemente Arrieta, Nueva Estrella" },
+            { id: 5, color: "border-pink-600", btn: "bg-pink-600", tel: "3147707291", barrios: "La Esperanza, 1 de Mayo, El Poblado, La Carbonera, Villa Javier 1-2, El Castillo, Parcelas de Caracolí, La Paz, El Prado, El Roble, Las Malvinas" },
+            { id: 6, color: "border-purple-600", btn: "bg-purple-600", tel: "3114536529", barrios: "El Paraíso, Las Brisas, Carmen Granzón, Los Comuneros" },
+            { id: 7, color: "border-red-700", btn: "bg-red-700", tel: "3136402443", barrios: "Cementerio, San Rafael 1-2, Pajonal" }
         ];
 
         function render(filter = "") {
@@ -48,19 +77,28 @@
             list.innerHTML = "";
             
             const filtered = cuadrantes.filter(c => 
-                c.barrios.toLowerCase().includes(filter.toLowerCase())
+                c.barrios.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+                         .includes(filter.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""))
             );
+
+            if(filtered.length === 0) {
+                list.innerHTML = `<p class="text-center text-gray-400 mt-10 italic">No se encontraron cuadrantes para esa zona.</p>`;
+                return;
+            }
 
             filtered.forEach(c => {
                 const card = `
-                    <div class="cuadrante-card bg-white rounded-xl shadow-md overflow-hidden border-l-8 ${c.color.replace('bg-', 'border-')}">
-                        <div class="p-4 flex justify-between items-center">
+                    <div class="cuadrante-card bg-white rounded-2xl shadow-sm border-l-4 ${c.color} overflow-hidden">
+                        <div class="p-4 flex items-center justify-between gap-3">
                             <div class="flex-1">
-                                <h3 class="font-bold text-gray-800">CUADRANTE N-${c.id}</h3>
-                                <p class="text-xs text-gray-500 truncate w-48">${c.barrios}</p>
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="text-xs font-bold px-2 py-0.5 rounded bg-gray-100 text-gray-600">N-${c.id}</span>
+                                    <h3 class="font-black text-slate-800 uppercase text-sm">Cuadrante</h3>
+                                </div>
+                                <p class="text-[11px] text-gray-500 leading-tight line-clamp-2">${c.barrios}</p>
                             </div>
-                            <a href="tel:${c.tel}" class="${c.color} text-white px-4 py-2 rounded-lg font-bold text-sm">
-                                LLAMAR
+                            <a href="tel:${c.tel}" class="${c.btn} text-white w-12 h-12 rounded-xl flex items-center justify-center shadow-lg active:scale-90 transition-transform">
+                                <i class="fas fa-phone-alt"></i>
                             </a>
                         </div>
                     </div>

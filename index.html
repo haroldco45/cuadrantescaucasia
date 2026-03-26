@@ -3,15 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cuadrantes de Seguridad - Vibras Positivas</title>
+    <title>Cuadrantes - Vibras Positivas</title>
+    
+    <meta name="theme-color" content="#15803d">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon-512.png">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         .cuadrante-card { transition: all 0.2s ease; }
         .cuadrante-card:active { transform: scale(0.96); }
-        .pulse-red {
-            animation: pulse-red 2s infinite;
-        }
+        .pulse-red { animation: pulse-red 2s infinite; }
         @keyframes pulse-red {
             0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
             70% { box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
@@ -22,13 +27,12 @@
 <body class="bg-slate-50 font-sans antialiased text-slate-900">
 
     <div class="max-w-md mx-auto min-h-screen flex flex-col p-4">
-        
         <header class="text-center mb-6 pt-4">
-            <h1 class="text-2xl font-black text-green-700 leading-tight">MODELO NACIONAL DE VIGILANCIA</h1>
-            <p class="text-gray-500 font-medium uppercase text-xs tracking-widest">Por Cuadrantes</p>
+            <h1 class="text-2xl font-black text-green-700 leading-tight uppercase">Seguridad Ciudadana</h1>
+            <p class="text-gray-500 font-medium uppercase text-xs tracking-widest">Vigilancia por Cuadrantes</p>
         </header>
 
-        <a href="tel:3113978374" class="pulse-red flex items-center justify-between bg-red-600 text-white p-4 rounded-2xl mb-6 shadow-xl transition-transform active:scale-95">
+        <a href="tel:3113978374" class="pulse-red flex items-center justify-between bg-red-600 text-white p-4 rounded-2xl mb-6 shadow-xl active:scale-95 transition-transform">
             <div>
                 <span class="block text-[10px] uppercase font-bold opacity-80">Línea de Emergencia</span>
                 <span class="text-2xl font-black tracking-tighter">311 397 8374</span>
@@ -46,22 +50,28 @@
                    class="w-full p-4 pl-10 rounded-2xl border-none shadow-sm focus:ring-2 focus:ring-green-500 outline-none text-lg">
         </div>
 
-        <div id="cuadrantesList" class="space-y-4 flex-grow">
-            </div>
+        <div id="cuadrantesList" class="space-y-4 flex-grow"></div>
 
         <footer class="mt-12 mb-6 text-center border-t border-gray-200 pt-6">
             <p class="text-[10px] text-gray-400 uppercase tracking-widest mb-1">App desarrollada por</p>
-            <p class="text-lg font-black text-slate-800 tracking-tighter">VIBRAS POSITIVAS</p>
+            <p class="text-lg font-black text-slate-800 tracking-tighter uppercase">Vibras Positivas</p>
             <p class="text-xs font-bold text-green-600 mb-2">Derechos de Autor (311 770 0431)</p>
-            <div class="flex justify-center gap-2 text-[10px] text-gray-400">
+            <div class="flex justify-center gap-2 text-[10px] text-gray-400 font-medium">
                 <span>&copy; 2026</span>
                 <span>•</span>
-                <span>Seguridad Ciudadana</span>
+                <span>Caucasia Segura</span>
             </div>
         </footer>
     </div>
 
     <script>
+        // Registro del Service Worker para funcionamiento Offline
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js');
+            });
+        }
+
         const cuadrantes = [
             { id: 1, color: "border-orange-900", btn: "bg-orange-900", tel: "3148446209", barrios: "Camello 1-2, Santa Elena, Los Almendros, La 10, El Palmar, Villa Uribe, Nueva Santa Elena, San José, Pedro Valdivia, El Bosque, Las Villas, Santo Domingo, Barrio Lora" },
             { id: 2, color: "border-green-600", btn: "bg-green-600", tel: "3148447487", barrios: "Asovivienda, El Triángulo, La Sudestación, Fiestas del Lago, Centro, Colinas del Portal, Buenos Aires 1-2, El Mar, Los Trabajadores, Altos de San Juan" },
@@ -75,14 +85,14 @@
         function render(filter = "") {
             const list = document.getElementById('cuadrantesList');
             list.innerHTML = "";
-            
+            const cleanFilter = filter.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
             const filtered = cuadrantes.filter(c => 
-                c.barrios.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-                         .includes(filter.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""))
+                c.barrios.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(cleanFilter)
             );
 
             if(filtered.length === 0) {
-                list.innerHTML = `<p class="text-center text-gray-400 mt-10 italic">No se encontraron cuadrantes para esa zona.</p>`;
+                list.innerHTML = `<p class="text-center text-gray-400 mt-10 italic">No se encontró el barrio...</p>`;
                 return;
             }
 
@@ -92,10 +102,9 @@
                         <div class="p-4 flex items-center justify-between gap-3">
                             <div class="flex-1">
                                 <div class="flex items-center gap-2 mb-1">
-                                    <span class="text-xs font-bold px-2 py-0.5 rounded bg-gray-100 text-gray-600">N-${c.id}</span>
-                                    <h3 class="font-black text-slate-800 uppercase text-sm">Cuadrante</h3>
+                                    <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-600">CUADRANTE N-${c.id}</span>
                                 </div>
-                                <p class="text-[11px] text-gray-500 leading-tight line-clamp-2">${c.barrios}</p>
+                                <p class="text-xs text-gray-500 leading-tight line-clamp-2">${c.barrios}</p>
                             </div>
                             <a href="tel:${c.tel}" class="${c.btn} text-white w-12 h-12 rounded-xl flex items-center justify-center shadow-lg active:scale-90 transition-transform">
                                 <i class="fas fa-phone-alt"></i>
